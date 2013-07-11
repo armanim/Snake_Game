@@ -3,7 +3,7 @@
 
 struct GlobalVariables
 {
-    int direction;
+    int direction;  //  the flag from control layer to snake
 
 };
 

@@ -14,6 +14,7 @@ public:
     CCSprite *player;    //the player of the snake
     int ratioConstant;  //for the image auto adjustment
     float moveUnit; //the one time moving distance
+    CCRect rect;
 
     void setPosition(int, int); //set the position py unit
 };

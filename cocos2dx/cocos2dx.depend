@@ -1,0 +1,95 @@
+# depslib dependency file v1.0
+1365872406 source:/home/abdutahir/Workspace/cocos2dx/Classes/AppDelegate.cpp
+	"AppDelegate.h"
+	"cocos2d.h"
+	"GameScene.h"
+
+1365340712 /home/abdutahir/Workspace/cocos2dx/Classes/AppDelegate.h
+	"CCApplication.h"
+
+1363818136 /home/abdutahir/Workspace/cocos2dx/Classes/HelloWorldScene.h
+	"cocos2d.h"
+
+1363818136 /home/abdutahir/Workspace/cocos2dx/Classes/AppMacros.h
+	"cocos2d.h"
+
+1363818136 source:/home/abdutahir/Workspace/cocos2dx/Classes/HelloWorldScene.cpp
+	"HelloWorldScene.h"
+	"AppMacros.h"
+
+1363818136 source:/home/abdutahir/Workspace/cocos2dx/cocos2dx/main.cpp
+	"../Classes/AppDelegate.h"
+	"cocos2d.h"
+	<stdlib.h>
+	<stdio.h>
+	<unistd.h>
+	<string>
+
+1365907198 /home/abdutahir/Workspace/cocos2dx/Classes/GameScene.h
+	"cocos2d.h"
+	"ControlLayer.h"
+	"ObjectLayer.h"
+	"BackgroundLayer.h"
+	"GlobalVariables.h"
+
+1365861544 /home/abdutahir/Workspace/cocos2dx/Classes/ControlLayer.h
+	"cocos2d.h"
+
+1366556832 /home/abdutahir/Workspace/cocos2dx/Classes/ObjectLayer.h
+	"cocos2d.h"
+	"Snake.h"
+	"Food.h"
+	"Player.h"
+
+1366194676 /home/abdutahir/Workspace/cocos2dx/Classes/SnakeHead.h
+	"cocos2d.h"
+
+1366193562 /home/abdutahir/Workspace/cocos2dx/Classes/Food.h
+	"cocos2d.h"
+
+1365823462 /home/abdutahir/Workspace/cocos2dx/Classes/BackgroundLayer.h
+	"cocos2d.h"
+
+1366128524 /home/abdutahir/Workspace/cocos2dx/Classes/GlobalVariables.h
+
+1365839764 source:/home/abdutahir/Workspace/cocos2dx/Classes/BackgroundLayer.cpp
+	"BackgroundLayer.h"
+	"Food.h"
+
+1366517884 source:/home/abdutahir/Workspace/cocos2dx/Classes/ControlLayer.cpp
+	"ControlLayer.h"
+	"ObjectLayer.h"
+	"Food.h"
+	"GlobalVariables.h"
+
+1366196014 source:/home/abdutahir/Workspace/cocos2dx/Classes/Food.cpp
+	"Food.h"
+	<iostream>
+
+1365907396 source:/home/abdutahir/Workspace/cocos2dx/Classes/GameScene.cpp
+	"GameScene.h"
+
+1366557240 source:/home/abdutahir/Workspace/cocos2dx/Classes/ObjectLayer.cpp
+	"ObjectLayer.h"
+	"GlobalVariables.h"
+
+1366562102 /home/abdutahir/Workspace/cocos2dx/Classes/Snake.h
+	"cocos2d.h"
+	"SnakeHead.h"
+	"Food.h"
+
+1366641950 /home/abdutahir/Workspace/cocos2dx/Classes/Player.h
+	"cocos2d.h"
+	"Snake.h"
+
+1366642146 source:/home/abdutahir/Workspace/cocos2dx/Classes/Player.cpp
+	"Player.h"
+
+1366562192 source:/home/abdutahir/Workspace/cocos2dx/Classes/Snake.cpp
+	"Snake.h"
+	"SnakeHead.h"
+
+1366517724 source:/home/abdutahir/Workspace/cocos2dx/Classes/SnakeHead.cpp
+	"SnakeHead.h"
+	"GlobalVariables.h"
+

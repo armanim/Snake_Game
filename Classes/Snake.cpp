@@ -1,54 +1,106 @@
 #include "Snake.h"
-#include "ObjectLayer.h"
-#include "GlobalVariables.h"
+#include "SnakeHead.h"
 
 using namespace cocos2d;
 
-extern GlobalVariables global;
-
 Snake::Snake()
 {
-    direction = 0;
+    float winHeight = CCDirector::sharedDirector()->getWinSize().height;
+    //  set snake
+    direction = RIGHT;//rand() % 4;
 
-    //get the window height
-    int winHeight = CCDirector::sharedDirector()->getWinSize().height;
+    //this->layer = layer;
 
-    //  set the ratioConstant
-    //  Ths is for the dynamic adjust to the different screen size
-    ratioConstant = 10;
-    float bScale = winHeight / (ratioConstant * 40);
-
-    //  set the image
-    head = CCSprite::create("Projectile.png", CCRectMake(0, 0, 20, 20));
-    head->setScale(bScale);
-
-    //  add to node
+    // setup the head
+    head = new SnakeHead("head.png");
+    head->setDirection(direction);
+    head->setPosition(CCPoint(600, 200));
     this->addChild(head);
 
-    // the size of one step
-    moveUnit = head->getContentSize().height;
+    //  setup the body
+    body = NULL;
+
+    //  set the ratioConstant
+    /*  Ths is for the dynamic adjust to the different screen size
+     * (showedHeight / windowHeight) = (1 / 20)
+     * showedHeight = scale * pictureHeight
+     */
+    int ratioConstant = 10;
+    imageScale = winHeight / (ratioConstant * head->player->getContentSize().height * 4);
+
+    //  get position for tail
+    CCPoint point = head->getPosition();
+    point = getNextBackPosition(point, direction);
+    moveUnit = head->moveUnit;
+    length = 0;
+
+    growUp();
+    growUp();
+
+
 }
 
 Snake::~Snake()
 {
-    delete head;
+    for (int i = 0; i < length; i++)
+    {
+        delete bodyArr[i];
+        bodyArr[i] = 0;
+    }
 }
 
-bool Snake::isLegalDirection(int value)
+void Snake::update()
 {
-    int a = global.direction;
-    int b = value;
-    if (value >= 0 && value <= 3 && (direction - value != 0))
-        return true;
-    return false;
+    //  update the position for next movement
+    CCPoint prePosition = head->getPosition();
+    head->move();
+    //prePosition = getNextBackPosition(prePosition, head->getDirection());
+
+    //  for body
+    for (int i = 0; i < length; i++)
+    {
+        CCPoint buff = bodyArr[i]->getPosition();
+        bodyArr[i]->setPosition(prePosition);
+        prePosition = buff;
+    }
 }
 
-void Snake::setDirection(int value)
+void Snake::growUp()
 {
-    //  check the value
-    if (isLegalDirection(value))
-        if ((value - direction != 2) && (direction - value != 2) && (direction - value != 0))
-            direction = value;
+    if (length < 99 ) {
+        //  get snake head position and direction
+        CCPoint point = head->getPosition();
+
+        //  create a snake body
+        CCSprite* bodyItem = CCSprite::create("body.png", CCRectMake(0, 0, 100, 100));
+        this->addChild(bodyItem);
+        bodyItem->setScale(imageScale);
+
+        if (length != 0)
+        {
+            for (int i = length; i > 0; i--)
+            {
+                bodyArr[i] = bodyArr[i - 1];
+            }
+        }
+
+        //  set body item to head position
+        bodyItem->setPosition(point);
+
+        //  let head make a move
+        point = head->getPosition();
+        point = bodyItem->getPosition();
+
+        //move head
+        head->move();
+
+
+        bodyArr[0] = bodyItem;
+
+        length++;
+
+    }
+
 }
 
 int Snake::getDirection()
@@ -56,51 +108,80 @@ int Snake::getDirection()
     return direction;
 }
 
-void Snake::move()
+void Snake::setDirection(int value)
 {
-    float x = this->getPosition().x;
-    float y = this->getPosition().y;
-
-    //  change position
-    switch(this->getDirection())
-    {
-        case UP:
-            y += moveUnit;
-            break;
-        case DOWN:
-            y -= moveUnit;
-            break;
-        case RIGHT:
-            x += moveUnit;
-            break;
-        case LEFT:
-            x -= moveUnit;
-        default:
-            break;
-    }
-
-    CCSize winSize = CCDirector::sharedDirector()->getWinSize();
-    CCSize contentSize = head->getContentSize();
-
-    if (x >= winSize.width  + contentSize.width)
-        this->setPosition(0 - contentSize.width / 2, y);
-    else if (x <= 0  - contentSize.width)
-        this->setPosition(0 - winSize.width + contentSize.width / 2, y);
-    else if (y >= winSize.height + contentSize.height)
-        this->setPosition(x, 0 - contentSize.height / 2);
-    else if (y <= 0 - contentSize.height)
-        this->setPosition(x, winSize.height + contentSize.height / 2);
-    else
-    {
-
-        //  set action dueation time
-        float duration = 0.3;
-
-        //  set action
-        CCFiniteTimeAction* actionMove =  CCMoveTo::create(duration, ccp(x, y));
-        this->runAction(actionMove);
-
-    }
+    direction = value;
 }
 
+void Snake::move()
+{
+        head->setDirection(direction);
+        update();
+}
 
+CCPoint Snake::getNextBackPosition(CCPoint position, int direction)
+{
+    float unit = head->moveUnit;
+    //  get the next item position
+    if (direction == UP)
+    {
+        position.y -= unit;
+    }
+    else if (direction == DOWN)
+    {
+        position.y += unit;
+    }
+    else if (direction == RIGHT)
+    {
+        position.x -= unit;
+    }
+    else
+    {
+        position.x += unit;
+    }
+    return position;
+}
+
+CCRect Snake::getHeadRect()
+{
+    return head->rect;
+}
+
+bool Snake::isDead()
+{
+    float unit = head->moveUnit / 2;
+    CCRect a  = getHeadRect();
+    for (int i = 0; i < length; i++)
+    {
+        float x = bodyArr[i]->getPosition().x;
+        float y = bodyArr[i]->getPosition().y;
+        CCRect rect = CCRectMake(
+            x - unit / 2, y - unit / 2, unit, unit);
+
+            if (getHeadRect().intersectsRect(rect))
+                return true;
+    }
+
+    return false;
+}
+
+CCPoint Snake::getHeadPosition()
+{
+    CCPoint point = head->getPosition();
+    return point;
+}
+
+CCPoint Snake::getBodyPosition(int index)
+{
+    CCPoint point = head->getPosition();
+    if (index <= length && index > 0)
+    {
+        point = bodyArr[index]->getPosition();
+    }
+    return point;
+}
+
+int Snake::getLength()
+{
+    return length;
+}

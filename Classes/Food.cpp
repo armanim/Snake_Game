@@ -7,7 +7,7 @@ Food::Food(int x, int y)
     int winHeight = CCDirector::sharedDirector()->getWinSize().height;
 
     //  set the image
-    player = CCSprite::create("Projectile.png", CCRectMake(0, 0, 20, 20));
+    player = CCSprite::create("food.png", CCRectMake(0, 0, 100, 100));
 
     //  set the ratioConstant
     /*  Ths is for the dynamic adjust to the different screen size
@@ -15,11 +15,17 @@ Food::Food(int x, int y)
      * showedHeight = scale * pictureHeight
      */
     ratioConstant = 1;
-    float bScale = winHeight / (ratioConstant * (player->getContentSize().height) * 20);
-
-    player->setScale(bScale);
+    float scale = winHeight / (ratioConstant * (player->getContentSize().height) * 40);
+    moveUnit = player->getContentSize().height * scale;
+    player->setScale(scale);
 
     this->setPosition(x, y);
+
+    //  make rectenguler
+    rect = CCRectMake(
+                      getPosition().x - moveUnit/2,
+                      getPosition().y - moveUnit/2,
+                      moveUnit/2, moveUnit/2);
 
     //  add to node
     this->addChild(player);
@@ -35,10 +41,10 @@ void Food::setPosition(int x, int y)
     //this is an adjustment to make food and snake in same road
     //
     CCSize winSize = CCDirector::sharedDirector()->getWinSize();
-    float top = winSize.height - player->getContentSize().height;
-    float floor = 0 + player->getContentSize().height;
-    float right = winSize.width - player->getContentSize().width;
-    float left = 0 + player->getContentSize().width;
+    float top = winSize.height - moveUnit - moveUnit / 2;
+    float floor = 0 + moveUnit + moveUnit / 2;
+    float right = winSize.width - moveUnit - moveUnit / 2;
+    float left = 0 + moveUnit + moveUnit / 2;
 
     x = (x > right) ? right : x;
     x = (x < left) ? left : x;
@@ -46,10 +52,11 @@ void Food::setPosition(int x, int y)
     y = (y < floor) ? floor : y;
 
     //adjust the food position make it in the same way of snake
-    x = x / (int)player->getContentSize().width;
-    y = y / (int)player->getContentSize().height;
+    x = x / (int)moveUnit;
+    y = y / (int)moveUnit;
 
-    float X = x * player->getContentSize().width + player->getContentSize().width / 2;
-    float Y = y * player->getContentSize().height + player->getContentSize().height / 2;
-    CCNode::setPosition(X, Y);
+    float X = x * moveUnit + moveUnit / 2;
+    float Y = y * moveUnit + moveUnit / 2;
+
+    this->CCNode::setPosition(X, Y);
 }

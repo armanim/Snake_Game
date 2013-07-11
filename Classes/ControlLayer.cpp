@@ -21,6 +21,8 @@ bool ControlLayer::init()
                                         this,
                                         menu_selector(ControlLayer::menuCloseCallback) );
     pCloseItem->setPosition( ccp(winSize.width-20, 20) );
+    pCloseItem->setScale(0.5);
+    pCloseItem->setOpacity(200);
 
     // create menu, it's an autorelease object
     CCMenu* pMenu = CCMenu::create(pCloseItem, NULL);
@@ -35,9 +37,9 @@ bool ControlLayer::init()
     int bX; //the x coordination
     int bY; //the y coordination
 
-    int ratioConstant = 4;    // for the auto adjusting size
+    int ratioConstant = 3;    // for the auto adjusting size
     float bScale = winSize.height / (ratioConstant * 100); // (screenHeight / buttonHeight) * ratioConstant
-    int transparence = 10;
+    int transparence = 30;
 
     bX = (winSize.width / 2);
     bY = (winSize.height / 6) * 5;
@@ -87,25 +89,25 @@ void ControlLayer::menuCloseCallback(CCObject* pSender)
 
 void ControlLayer::Moveup(CCObject* sender)
 {
-    global.direction = 0;
+    global.direction = UP;
     CCLog("Moveup");
 }
 
 void ControlLayer::Movedown(CCObject* sender)
 {
-    global.direction = 2;
+    global.direction = DOWN;
     CCLog("Movedown");
 }
 
 void ControlLayer::Moveright(CCObject* sender)
 {
-    global.direction = 1;
+    global.direction = RIGHT;
     CCLog("Moveright");
 }
 
 void ControlLayer::Moveleft(CCObject* sender)
 {
-    global.direction = 3;
+    global.direction = LEFT;
     CCLog("Moveleft");
 }
 
