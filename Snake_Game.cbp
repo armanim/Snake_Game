@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Snake_Game" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Snake_Game" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Snake_Game" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="Classes/AppDelegate.cpp" />
+		<Unit filename="Classes/AppDelegate.h" />
+		<Unit filename="Classes/BackgroundLayer.cpp" />
+		<Unit filename="Classes/BackgroundLayer.h" />
+		<Unit filename="Classes/ControlLayer.cpp" />
+		<Unit filename="Classes/ControlLayer.h" />
+		<Unit filename="Classes/Food.cpp" />
+		<Unit filename="Classes/Food.h" />
+		<Unit filename="Classes/GameScene.cpp" />
+		<Unit filename="Classes/GameScene.h" />
+		<Unit filename="Classes/GlobalVariables.h" />
+		<Unit filename="Classes/ObjectLayer.cpp" />
+		<Unit filename="Classes/ObjectLayer.h" />
+		<Unit filename="Classes/Player.cpp" />
+		<Unit filename="Classes/Player.h" />
+		<Unit filename="Classes/Snake.cpp" />
+		<Unit filename="Classes/Snake.h" />
+		<Unit filename="Classes/SnakeHead.cpp" />
+		<Unit filename="Classes/SnakeHead.h" />
+		<Unit filename="Pro_linux/main.cpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

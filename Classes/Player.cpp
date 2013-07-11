@@ -111,5 +111,5 @@ void Player::setDirection(int direction)
 
 void Player::adjustDirection(int direction)
 {
-    if (direction == UP)
+    //if (direction == UP)
 }
