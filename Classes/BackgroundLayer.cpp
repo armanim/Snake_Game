@@ -3,6 +3,7 @@
 
 using namespace cocos2d;
 
+/* This is the back ground layer that manage the back ground apperiance and functions*/
 // on "init" you need to initialize your instance
 bool BackgroundLayer::init()
 {

@@ -37,8 +37,8 @@ bool ControlLayer::init()
     int bX; //the x coordination
     int bY; //the y coordination
 
-    int ratioConstant = 3;    // for the auto adjusting size
-    float bScale = winSize.height / (ratioConstant * 100); // (screenHeight / buttonHeight) * ratioConstant
+    int sizeAdjustionRatioConstant = 3;    // for the auto adjusting size
+    float bScale = winSize.height / (sizeAdjustionRatioConstant * 100); // (screenHeight / buttonHeight) * ratioConstant
     int transparence = 30;
 
     bX = (winSize.width / 2);

@@ -12,9 +12,9 @@ public:
     ~Food();
 
     CCSprite *player;    //the player of the snake
-    int ratioConstant;  //for the image auto adjustment
+    int sizeAdjustionRatioConstant;  //for the image auto adjustment
     float moveUnit; //the one time moving distance
-    CCRect rect;
+    CCRect areaRect;
 
     void setPosition(int, int); //set the position py unit
 };

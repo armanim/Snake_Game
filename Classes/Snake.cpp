@@ -5,7 +5,7 @@ using namespace cocos2d;
 
 Snake::Snake()
 {
-    float winHeight = CCDirector::sharedDirector()->getWinSize().height;
+    float windowHeight = CCDirector::sharedDirector()->getWinSize().height;
     //  set snake
     direction = RIGHT;//rand() % 4;
 
@@ -25,8 +25,8 @@ Snake::Snake()
      * (showedHeight / windowHeight) = (1 / 20)
      * showedHeight = scale * pictureHeight
      */
-    int ratioConstant = 10;
-    imageScale = winHeight / (ratioConstant * head->player->getContentSize().height * 4);
+    int sizeAdjustionRatioConstant = 10;
+    imageScale = windowHeight / (sizeAdjustionRatioConstant * head->avatar->getContentSize().height * 4);
 
     //  get position for tail
     CCPoint point = head->getPosition();
@@ -144,21 +144,21 @@ CCPoint Snake::getNextBackPosition(CCPoint position, int direction)
 
 CCRect Snake::getHeadRect()
 {
-    return head->rect;
+    return head->areaRect;
 }
 
 bool Snake::isDead()
 {
     float unit = head->moveUnit / 2;
-    CCRect a  = getHeadRect();
+
     for (int i = 0; i < length; i++)
     {
         float x = bodyArr[i]->getPosition().x;
         float y = bodyArr[i]->getPosition().y;
-        CCRect rect = CCRectMake(
+        CCRect areaRect = CCRectMake(
             x - unit / 2, y - unit / 2, unit, unit);
 
-            if (getHeadRect().intersectsRect(rect))
+            if (getHeadRect().intersectsRect(areaRect))
                 return true;
     }
 

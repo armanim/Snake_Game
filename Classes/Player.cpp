@@ -54,46 +54,46 @@ int Player::searchDirection(CCPoint destination)
     }
 }
 
-bool Player::checkUp(CCRect rect)
+bool Player::checkUp(CCRect areaRect)
 {
     float unit = mySnake->moveUnit / 2;
     upRect = CCRectMake(headPosition.x, headPosition.y + unit + unit / 2, unit, unit);
 
     //  if is avalible return true
-    if (upRect.intersectsRect(rect))
+    if (upRect.intersectsRect(areaRect))
         return false;
     return true;
 }
 
-bool Player::checkDown(CCRect rect)
+bool Player::checkDown(CCRect areaRect)
 {
     float unit = mySnake->moveUnit / 2;
     downRect = CCRectMake(headPosition.x, headPosition.y - unit - unit / 2, unit, unit);
 
     //  if is avalible return true
-    if (downRect.intersectsRect(rect))
+    if (downRect.intersectsRect(areaRect))
         return false;
     return true;
 }
 
-bool Player::checkRight(CCRect rect)
+bool Player::checkRight(CCRect areaRect)
 {
     float unit = mySnake->moveUnit / 2;
     rightRect = CCRectMake(headPosition.x  + unit + unit / 2, headPosition.y, unit, unit);
 
     //  if is avalible return true
-    if (rightRect.intersectsRect(rect))
+    if (rightRect.intersectsRect(areaRect))
         return false;
     return true;
 }
 
-bool Player::checkLeft(CCRect rect)
+bool Player::checkLeft(CCRect areaRect)
 {
     float unit = mySnake->moveUnit / 2;
     leftRect = CCRectMake(headPosition.x - unit - unit / 2, headPosition.y, unit, unit);
 
     //  if is avalible return true
-    if (leftRect.intersectsRect(rect))
+    if (leftRect.intersectsRect(areaRect))
         return false;
     return true;
 }

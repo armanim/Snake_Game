@@ -23,7 +23,7 @@ public:
     int getLength();
     bool isDead();
 
-    bool moving;
+    bool isMoving;
     float imageScale;
     float moveUnit;
 

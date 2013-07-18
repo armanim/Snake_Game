@@ -4,7 +4,7 @@
 Food::Food(int x, int y)
 {
     //get the window height
-    int winHeight = CCDirector::sharedDirector()->getWinSize().height;
+    int windowHeight = CCDirector::sharedDirector()->getWinSize().height;
 
     //  set the image
     player = CCSprite::create("food.png", CCRectMake(0, 0, 100, 100));
@@ -14,15 +14,15 @@ Food::Food(int x, int y)
      * (showedHeight / windowHeight) = (1 / 20)
      * showedHeight = scale * pictureHeight
      */
-    ratioConstant = 1;
-    float scale = winHeight / (ratioConstant * (player->getContentSize().height) * 40);
+    sizeAdjustionRatioConstant = 1;
+    float scale = windowHeight / (sizeAdjustionRatioConstant * (player->getContentSize().height) * 40);
     moveUnit = player->getContentSize().height * scale;
     player->setScale(scale);
 
     this->setPosition(x, y);
 
     //  make rectenguler
-    rect = CCRectMake(
+    areaRect = CCRectMake(
                       getPosition().x - moveUnit/2,
                       getPosition().y - moveUnit/2,
                       moveUnit/2, moveUnit/2);

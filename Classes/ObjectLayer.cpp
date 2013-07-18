@@ -7,7 +7,6 @@ extern GlobalVariables global;
 
 bool ObjectLayer::init()
 {
-    CCSize winSize = CCDirector::sharedDirector()->getWinSize();
     //  add the snake
     snake = new Snake();
     this->addChild(snake);
@@ -33,13 +32,13 @@ bool ObjectLayer::init()
 
 void ObjectLayer::update()
 {
-    if (snake->getHeadRect().intersectsRect(food->rect))
+    if (snake->getHeadRect().intersectsRect(food->areaRect))
     {
         addFood();
         snake->growUp();
     }
 
-    if (robot->getHeadRect().intersectsRect(food->rect))
+    if (robot->getHeadRect().intersectsRect(food->areaRect))
     {
         addFood();
         robot->growUp();
