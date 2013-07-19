@@ -1,49 +1,57 @@
+/**SnakeHead.cpp
+ * The class implementation for the snake head
+ * Snake head control the snake direction and eat the foods
+ * Author: armanim
+ * Version 2.0
+ * Last update 7/20/2013
+ */
+
 #include "SnakeHead.h"
 #include "GlobalVariables.h"
 
 using namespace cocos2d;
 
-SnakeHead::SnakeHead(const char* image)
+SnakeHead::SnakeHead(const char* imageFileName)
 {
-    //get the window height
-    int winHeight = CCDirector::sharedDirector()->getWinSize().height;
+    // is not moving
+    isMoving = false;
 
-    //  set the image
-    player = CCSprite::create(image, CCRectMake(0, 0, 100, 100));
+    // get the window height
+    int windowHeight = getWindowHight();
+
+    // set the imageFileName
+    setAvatar(imageFileName);
+    //  add to node
+    this->addChild(getAvatar());
+
     setDirection(RIGHT);
 
     //  set the ratioConstant
-    /*  Ths is for the dynamic adjust to the different screen size
-     * (showedHeight / windowHeight) = (1 / 20)
-     * showedHeight = scale * pictureHeight
-     */
-    ratioConstant = 10;
-    float imageScale = winHeight / (ratioConstant * player->getContentSize().height * 4);
-    player->setScale(imageScale);
-
-    //  add to node
-    this->addChild(player);
+    setSizeAdjustionRatioConstant(10);
+    adjustObjectSize(getAvatar(), windowHeight);
 
     // the size of one step
-    moveUnit = player->getContentSize().height * imageScale;
-
-    //  is not moving
-    moving = false;
+    setMoveUnitPerStep(getAvatar(), windowHeight);
+    float moveUnit = getMoveUnitPerStep();
 
     //  make rectenguler
-    rect = CCRectMake(
+    areaRect = CCRectMake(
                       getPosition().x - moveUnit/2,
                       getPosition().y - moveUnit/2,
                       moveUnit, moveUnit);
-
 }
 
 SnakeHead::~SnakeHead()
 {
-    delete player;
-    player = 0;
+    CCSprite* buff = getAvatar();
+    delete buff;
+    buff = 0;
 }
 
+int SnakeHead::getWindowHight()
+{
+    return CCDirector::sharedDirector()->getWinSize().height;
+}
 
 bool SnakeHead::isLegalDirection(int value)
 {
@@ -62,16 +70,16 @@ void SnakeHead::setDirection(int value)
             switch(direction)
             {
                 case UP:
-                    player->setRotation(0);
+                    getAvatar()->setRotation(0);
                     break;
                 case DOWN:
-                    player->setRotation(180);
+                    getAvatar()->setRotation(180);
                     break;
                 case RIGHT:
-                    player->setRotation(90);
+                    getAvatar()->setRotation(90);
                     break;
                 case LEFT:
-                    player->setRotation(270);
+                    getAvatar()->setRotation(270);
                 default:
                     break;
             }
@@ -86,7 +94,8 @@ int SnakeHead::getDirection()
 
 void SnakeHead::move()
 {
-    moving = true;
+    isMoving = true;
+    float moveUnit = getMoveUnitPerStep();
 
     float x = this->getPosition().x;
     float y = this->getPosition().y;
@@ -113,11 +122,11 @@ void SnakeHead::move()
     CCPoint point = getPosition();
 
     //  update rectenguler
-    rect = CCRectMake(
+    areaRect = CCRectMake(
                       point.x - moveUnit/2,
                       point.y - moveUnit/2,
                       moveUnit/2, moveUnit/2);
-    moving = false;
+    isMoving = false;
 
 }
 
@@ -130,10 +139,9 @@ bool SnakeHead::isLegalPosition()
 
     //  get window size and self size
     CCSize winSize = CCDirector::sharedDirector()->getWinSize();
-    CCSize contentSize = player->getContentSize();
 
-    float width = player->getContentSize().width / 2;
-    float height = player->getContentSize().height / 2;
+    float width = getAvatar()->getContentSize().width / 2;
+    float height = getAvatar()->getContentSize().height / 2;
 
     if (x >= winSize.width  - width)
         return false;
@@ -148,6 +156,7 @@ bool SnakeHead::isLegalPosition()
 
 CCPoint SnakeHead::adjustPosition()
 {
+    float moveUnit = getMoveUnitPerStep();
     //  get self position
     CCPoint position = getPosition();
     float x = position.x;

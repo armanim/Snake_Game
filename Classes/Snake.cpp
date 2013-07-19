@@ -26,12 +26,12 @@ Snake::Snake()
      * showedHeight = scale * pictureHeight
      */
     int sizeAdjustionRatioConstant = 10;
-    imageScale = windowHeight / (sizeAdjustionRatioConstant * head->avatar->getContentSize().height * 4);
+    imageScale = windowHeight / (sizeAdjustionRatioConstant * head->getAvatar()->getContentSize().height * 4);
 
     //  get position for tail
     CCPoint point = head->getPosition();
     point = getNextBackPosition(point, direction);
-    moveUnit = head->moveUnit;
+    moveUnit = head->getMoveUnitPerStep();
     length = 0;
 
     growUp();
@@ -121,7 +121,7 @@ void Snake::move()
 
 CCPoint Snake::getNextBackPosition(CCPoint position, int direction)
 {
-    float unit = head->moveUnit;
+    float unit = head->getMoveUnitPerStep();
     //  get the next item position
     if (direction == UP)
     {
@@ -149,7 +149,7 @@ CCRect Snake::getHeadRect()
 
 bool Snake::isDead()
 {
-    float unit = head->moveUnit / 2;
+    float unit = head->getMoveUnitPerStep() / 2;
 
     for (int i = 0; i < length; i++)
     {

@@ -3,14 +3,16 @@
  * Snake head control the snake direction and eat the foods
  * Author: armanim
  * Version 1.0
- * Last update 7/18/2013
+ * Last update 7/20/2013
  */
 
 #include "GameObject.h"
 
 GameObject::GameObject()
 {
+    // initialize the varibles
     sizeAdjustionRatioConstant = 1;
+    moveUnitPerStep = 1;
 }
 
 void GameObject::setSizeAdjustionRatioConstant(int constant)
@@ -18,6 +20,17 @@ void GameObject::setSizeAdjustionRatioConstant(int constant)
     sizeAdjustionRatioConstant = constant;
 }
 
+// add a avatar (image face) to the node
+void GameObject::setAvatar(const char* imageFileName)
+{
+    avatar = cocos2d::CCSprite::create(imageFileName, cocos2d::CCRectMake(0, 0, 100, 100));
+}
+
+void GameObject::setMoveUnitPerStep(cocos2d::CCSprite* avatar, const int windowHeight)
+{
+    // see the "getImageScale" fuction
+    moveUnitPerStep = avatar->getContentSize().height * getImageScale(avatar, windowHeight);
+}
 void GameObject::adjustObjectSize(cocos2d::CCSprite* avatar, const int windowHeight)
 {
     float imageScale = GameObject::getImageScale(avatar, windowHeight);
@@ -34,7 +47,12 @@ float GameObject::getImageScale(cocos2d::CCSprite* avatar, const int windowHeigh
     return windowHeight / (sizeAdjustionRatioConstant * avatar->getContentSize().height * 4);
 }
 
-float GameObject::getMoveUnitPerStep(cocos2d::CCSprite* avatar, const int windowHeight)
+float GameObject::getMoveUnitPerStep()
 {
-    return avatar->getContentSize().height * GameObject::getImageScale(avatar, windowHeight);
+    return moveUnitPerStep;
+}
+
+cocos2d::CCSprite* GameObject::getAvatar()
+{
+    return avatar;
 }

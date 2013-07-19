@@ -40,6 +40,8 @@
 		<Unit filename="Classes/ControlLayer.h" />
 		<Unit filename="Classes/Food.cpp" />
 		<Unit filename="Classes/Food.h" />
+		<Unit filename="Classes/GameObject.cpp" />
+		<Unit filename="Classes/GameObject.h" />
 		<Unit filename="Classes/GameScene.cpp" />
 		<Unit filename="Classes/GameScene.h" />
 		<Unit filename="Classes/GlobalVariables.h" />

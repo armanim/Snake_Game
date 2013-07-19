@@ -1,7 +1,13 @@
+/**SnakeHead.h
+ * The class statement for the snake head
+ * Snake head control the snake direction and eat the foods
+ * Author: armanim
+ * Version 2.0
+ * Last update 7/20/2013
+ */
 #ifndef SNAKEHEAD_H_INCLUDED
 #define SNAKEHEAD_H_INCLUDED
 
-#include "cocos2d.h"
 #ifndef UP DOWN RIGHT LEFT
 
 #define UP 0
@@ -11,35 +17,34 @@
 
 #endif
 
+#include "cocos2d.h"
+#include "GameObject.h"
 
 using namespace cocos2d;
 
-class SnakeHead : public cocos2d::CCNode
+
+class SnakeHead : public cocos2d::CCNode, public GameObject
 {
 public:
+    int sizeAdjustionRatioConstant;     // for the image auto adjustment
+    bool die;                           // if the snake is living
+    bool isMoving;                      // the flag for running state
 
-    CCSprite *player;    //the player of the snake
-    int ratioConstant;  //for the image auto adjustment
-    int length; //the length of snake
-    bool die;   //if the snake is living
-    float moveUnit; //the one time moving distance
-    bool moving; //  the flag for running state
-    CCRect rect;    //the rectenguler
+    SnakeHead(const char*);             // constractor
+    ~SnakeHead();                       //distractor
 
-    SnakeHead(const char*);
-    ~SnakeHead();
-
-    void move();    // move a step
-    void setDirection(int); //set the direction for nex movement
-    int getDirection(); //get the current diraction
+    void setDirection(int);             // set the direction for nex movement
+    void setPosition(CCPoint);          // set adjustted position
+    int getDirection();                 // get the current diraction
     int getBackDirection();
+    int getWindowHight();
     bool isLegalPosition();
-    void setPosition(CCPoint);  //  set adjustted position
     CCPoint adjustPosition();
+    void move();                        // move a step
 
 protected:
-    int direction;  //direction for nex movement
-    bool isLegalDirection(int); //check the inout diractiom
+    int direction;                      //direction for nex movement
+    bool isLegalDirection(int);         //check the inout diractiom
 };
 
 #endif // SNAKE_H_INCLUDED
