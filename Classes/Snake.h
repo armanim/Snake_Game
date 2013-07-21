@@ -15,11 +15,11 @@ public:
     void setDirection(int);
     int getDirection();
     void move();
-    CCPoint getHeadPosition();  //  return the head position
-    CCPoint getBodyPosition(int);  //  return the body position by index
-    CCPoint getNextBackPosition(CCPoint, int);      //  get next back position by directiom
+    cocos2d::CCPoint getHeadPosition();  //  return the head position
+    cocos2d::CCPoint getBodyPosition(int);  //  return the body position by index
+    cocos2d::CCPoint getNextBackPosition(cocos2d::CCPoint, int);      //  get next back position by directiom
                                                     //  use for the grow up
-    CCRect getHeadRect();   //  return the head rectangular
+    cocos2d::CCRect getHeadRect();   //  return the head rectangular
     int getLength();
     bool isDead();
 
@@ -32,8 +32,8 @@ private:
     int currentDirection;  //  the snake moving direction
     bool isRunning;
     SnakeHead *head;   //  the handle(head) of snake
-    CCSprite* bodyArr[100];
-    CCSprite* body;    //  the frist element in the array
+    cocos2d::CCSprite* bodyArr[100];
+    cocos2d::CCSprite* body;    //  the frist element in the array
 
 };
 

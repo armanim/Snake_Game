@@ -1,34 +1,25 @@
 #include "Food.h"
-#include <iostream>
 
 Food::Food(int x, int y)
 {
     //get the window height
-    int windowHeight = CCDirector::sharedDirector()->getWinSize().height;
+    int windowHeight = cocos2d::CCDirector::sharedDirector()->getWinSize().height;
 
     //  set the image
-    player = CCSprite::create("food.png", CCRectMake(0, 0, 100, 100));
+    setAvatar("food.png");
 
     //  set the ratioConstant
-    /*  Ths is for the dynamic adjust to the different screen size
-     * (showedHeight / windowHeight) = (1 / 20)
-     * showedHeight = scale * pictureHeight
-     */
-    sizeAdjustionRatioConstant = 1;
-    float scale = windowHeight / (sizeAdjustionRatioConstant * (player->getContentSize().height) * 40);
-    moveUnit = player->getContentSize().height * scale;
-    player->setScale(scale);
+    setSizeAdjustionRatioConstant(40);
 
-    this->setPosition(x, y);
+    // adjust size
+    adjustObjectSize(getAvatar(), windowHeight);
 
-    //  make rectenguler
-    areaRect = CCRectMake(
-                      getPosition().x - moveUnit/2,
-                      getPosition().y - moveUnit/2,
-                      moveUnit/2, moveUnit/2);
+    setPosition(x, y);
 
     //  add to node
-    this->addChild(player);
+    addChild(getAvatar());
+
+    setObjectRectangular();
 }
 
 Food::~Food()
@@ -38,25 +29,17 @@ Food::~Food()
 
 void Food::setPosition(int x, int y)
 {
-    //this is an adjustment to make food and snake in same road
-    //
-    CCSize winSize = CCDirector::sharedDirector()->getWinSize();
-    float top = winSize.height - moveUnit - moveUnit / 2;
-    float floor = 0 + moveUnit + moveUnit / 2;
-    float right = winSize.width - moveUnit - moveUnit / 2;
-    float left = 0 + moveUnit + moveUnit / 2;
+    // get windiw size
+    int windowHeight = cocos2d::CCDirector::sharedDirector()->getWinSize().height;
+    int windowWidth = cocos2d::CCDirector::sharedDirector()->getWinSize().width;
 
-    x = (x > right) ? right : x;
-    x = (x < left) ? left : x;
-    y = (y > top) ? top : y;
-    y = (y < floor) ? floor : y;
+    // make first adjastion
+    x %= windowWidth;
+    y %= windowHeight;
 
-    //adjust the food position make it in the same way of snake
-    x = x / (int)moveUnit;
-    y = y / (int)moveUnit;
+    // create new position
+    cocos2d::CCPoint newPosition = cocos2d::CCPoint(x, y);
 
-    float X = x * moveUnit + moveUnit / 2;
-    float Y = y * moveUnit + moveUnit / 2;
-
-    this->CCNode::setPosition(X, Y);
+    // set adjusted position
+    setObjectAdjustedPosition(newPosition);
 }

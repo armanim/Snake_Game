@@ -33,7 +33,7 @@ void GameObject::setMoveUnitPerStep(cocos2d::CCSprite* avatar, const int windowH
 }
 void GameObject::adjustObjectSize(cocos2d::CCSprite* avatar, const int windowHeight)
 {
-    float imageScale = GameObject::getImageScale(avatar, windowHeight);
+    imageScale = GameObject::getImageScale(avatar, windowHeight);
     avatar->setScale(imageScale);
 }
 
@@ -44,7 +44,7 @@ float GameObject::getImageScale(cocos2d::CCSprite* avatar, const int windowHeigh
      * (showedHeight / windowHeight) = (1 / 20)
      * showedHeight = scale * pictureHeight
      */
-    return windowHeight / (sizeAdjustionRatioConstant * avatar->getContentSize().height * 4);
+    return windowHeight / (sizeAdjustionRatioConstant * avatar->getContentSize().height);
 }
 
 float GameObject::getMoveUnitPerStep()
@@ -85,10 +85,11 @@ void GameObject::setObjectAdjustedPosition(cocos2d::CCPoint newPosition)
 
 cocos2d::CCPoint GameObject::adjustObjectPosition(cocos2d::CCPoint newPosition)
 {
-    float moveUnit = getMoveUnitPerStep();
+    float objectWidth = getAdjustedAvatarContentSize().width;
+    float objectHeight = getAdjustedAvatarContentSize().height;
 
-    float halfObjectWidth = moveUnit / 2;
-    float halfObjectHeight = moveUnit / 2;
+    float halfObjectWidth = objectWidth / 2;
+    float halfObjectHeight = objectHeight / 2;
 
     // adjust newPosition to legal
     cocos2d::CCSize winSize = cocos2d::CCDirector::sharedDirector()->getWinSize();
@@ -100,32 +101,45 @@ cocos2d::CCPoint GameObject::adjustObjectPosition(cocos2d::CCPoint newPosition)
     //  check newPosition and give new value
     if (newPosition.y > top + halfObjectHeight)
         newPosition.setPoint(newPosition.x, floor);
+
     else if (newPosition.y < floor - halfObjectHeight)
         newPosition.setPoint(newPosition.x, top);
+
     else if (newPosition.x > right + halfObjectWidth)
         newPosition.setPoint(left, newPosition.y);
+
     else if (newPosition.x < left - halfObjectWidth)
         newPosition.setPoint(right, newPosition.y);
+
     else
     {
-        newPosition.x = newPosition.x / (int)moveUnit;
-        newPosition.y = newPosition.y / (int)moveUnit;
+        newPosition.x = newPosition.x / (int)objectWidth;
+        newPosition.y = newPosition.y / (int)objectHeight;
 
-        newPosition.x = ((int)newPosition.x) * moveUnit + halfObjectWidth;
-        newPosition.y = ((int)newPosition.y) * moveUnit + halfObjectHeight;
+        newPosition.x = ((int)newPosition.x) * objectWidth + halfObjectWidth;
+        newPosition.y = ((int)newPosition.y) * objectHeight + halfObjectHeight;
     }
 
     return newPosition;
 }
 
-void GameObject::setObjectRectengular()
+void GameObject::setObjectRectangular()
 {
-    float halfObjectWidth = moveUnitPerStep / 2;
-    float halfObjectHeight = moveUnitPerStep / 2;
+    float objectWidth = getAdjustedAvatarContentSize().width;
+    float objectHeight = getAdjustedAvatarContentSize().height;
 
     // make rectenguler
-    areaRect = cocos2d::CCRectMake(
-                      getPosition().x - halfObjectWidth,
-                      getPosition().y - halfObjectHeight,
-                      moveUnitPerStep, moveUnitPerStep);
+    areaRectangular = cocos2d::CCRectMake(
+                      cocos2d::CCNode::getPosition().x - objectWidth / 2,
+                      cocos2d::CCNode::getPosition().y - objectHeight / 2,
+                      objectWidth, objectHeight);
+}
+
+cocos2d::CCSize GameObject::getAdjustedAvatarContentSize()
+{
+    cocos2d::CCSize adjustedAvatarContentSize;
+    adjustedAvatarContentSize.width = avatar->getContentSize().width * imageScale;
+    adjustedAvatarContentSize.height = avatar->getContentSize().height * imageScale;
+
+    return adjustedAvatarContentSize;
 }

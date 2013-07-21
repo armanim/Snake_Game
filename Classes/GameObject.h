@@ -42,7 +42,7 @@ public:
     void setMoveUnitPerStep(cocos2d::CCSprite*, const int);
 
     // set the object rectengular
-    void setObjectRectengular();
+    void setObjectRectangular();
 
     // calculate the image scale
     float getImageScale(cocos2d::CCSprite*, const int);
@@ -52,8 +52,11 @@ public:
 
     cocos2d::CCSprite* getAvatar();
 
+    // get adjusted image size, width and heiht
+    cocos2d::CCSize getAdjustedAvatarContentSize();
+
     // the rectenguler
-    cocos2d::CCRect areaRect;
+    cocos2d::CCRect areaRectangular;
 
 private:
     // the player of the snake
@@ -61,6 +64,9 @@ private:
 
     // for the image auto adjustment
     int sizeAdjustionRatioConstant;
+
+    // the adjusted image scale
+    float imageScale;
 
     // move unit for a step
     float moveUnitPerStep;

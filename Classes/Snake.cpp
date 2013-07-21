@@ -14,7 +14,7 @@ Snake::Snake()
     // setup the head
     head = new SnakeHead("head.png");
     head->setDirection(currentDirection);
-    head->setPosition(CCPoint(600, 200));
+    head->setObjectAdjustedPosition(CCPoint(600, 200));
     this->addChild(head);
 
     //  setup the body
@@ -34,8 +34,8 @@ Snake::Snake()
     moveUnit = head->getMoveUnitPerStep();
     length = 0;
 
-    growUp();
-    growUp();
+//    growUp();
+//    growUp();
 
 
 }
@@ -67,39 +67,39 @@ void Snake::update()
 
 void Snake::growUp()
 {
-    if (length < 99 ) {
-        //  get snake head position and direction
-        CCPoint point = head->getPosition();
-
-        //  create a snake body
-        CCSprite* bodyItem = CCSprite::create("body.png", CCRectMake(0, 0, 100, 100));
-        this->addChild(bodyItem);
-        bodyItem->setScale(imageScale);
-
-        if (length != 0)
-        {
-            for (int i = length; i > 0; i--)
-            {
-                bodyArr[i] = bodyArr[i - 1];
-            }
-        }
-
-        //  set body item to head position
-        bodyItem->setPosition(point);
-
-        //  let head make a move
-        point = head->getPosition();
-        point = bodyItem->getPosition();
-
-        //move head
-        head->move();
-
-
-        bodyArr[0] = bodyItem;
-
-        length++;
-
-    }
+//    if (length < 99 ) {
+//        //  get snake head position and direction
+//        CCPoint point = head->getPosition();
+//
+//        //  create a snake body
+//        CCSprite* bodyItem = CCSprite::create("body.png", CCRectMake(0, 0, 100, 100));
+//        this->addChild(bodyItem);
+//        bodyItem->setScale(imageScale);
+//
+//        if (length != 0)
+//        {
+//            for (int i = length; i > 0; i--)
+//            {
+//                bodyArr[i] = bodyArr[i - 1];
+//            }
+//        }
+//
+//        //  set body item to head position
+//        bodyItem->setPosition(point);
+//
+//        //  let head make a move
+//        point = head->getPosition();
+//        point = bodyItem->getPosition();
+//
+//        //move head
+//        head->move();
+//
+//
+//        bodyArr[0] = bodyItem;
+//
+//        length++;
+//
+//    }
 
 }
 
@@ -144,7 +144,7 @@ CCPoint Snake::getNextBackPosition(CCPoint position, int currentDirection)
 
 CCRect Snake::getHeadRect()
 {
-    return head->areaRect;
+    return head->areaRectangular;
 }
 
 bool Snake::isDead()
@@ -155,11 +155,14 @@ bool Snake::isDead()
     {
         float x = bodyArr[i]->getPosition().x;
         float y = bodyArr[i]->getPosition().y;
-        CCRect areaRect = CCRectMake(
+        CCRect areaRectangular = CCRectMake(
             x - unit / 2, y - unit / 2, unit, unit);
 
-            if (getHeadRect().intersectsRect(areaRect))
+            if (getHeadRect().intersectsRect(areaRectangular))
+            {
+                CCLog("dead");
                 return true;
+            }
     }
 
     return false;

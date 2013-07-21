@@ -9,24 +9,24 @@ class Player
 public:
     Player(Snake*);
 
-    void play(CCPoint);    //  play game
+    void play(cocos2d::CCPoint);    //  play game
 
 private:
     void setDirection(int);    //  set a direction for snake
-    int searchDirection(CCPoint);  //  search next direction
-    bool checkUp(CCRect); //  check if up direcrion is avalible
-    bool checkDown(CCRect);   //  check if down direction is avalible
-    bool checkRight(CCRect);  //  check if right direction is avalible
-    bool checkLeft(CCRect);   //  check if left direcrion is avalible
+    int searchDirection(cocos2d::CCPoint);  //  search next direction
+    bool checkUp(cocos2d::CCRect); //  check if up direcrion is avalible
+    bool checkDown(cocos2d::CCRect);   //  check if down direction is avalible
+    bool checkRight(cocos2d::CCRect);  //  check if right direction is avalible
+    bool checkLeft(cocos2d::CCRect);   //  check if left direcrion is avalible
     void adjustDirection(int);
 
     Snake* mySnake;
-    CCPoint headPosition;
-    CCPoint nexPosition;
-    CCRect upRect;
-    CCRect downRect;
-    CCRect rightRect;
-    CCRect leftRect;
+    cocos2d::CCPoint headPosition;
+    cocos2d::CCPoint nexPosition;
+    cocos2d::CCRect upRect;
+    cocos2d::CCRect downRect;
+    cocos2d::CCRect rightRect;
+    cocos2d::CCRect leftRect;
 };
 
 #endif // PLAYER_H_INCLUDED

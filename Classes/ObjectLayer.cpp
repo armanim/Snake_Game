@@ -32,13 +32,13 @@ bool ObjectLayer::init()
 
 void ObjectLayer::update()
 {
-    if (snake->getHeadRect().intersectsRect(food->areaRect))
+    if (snake->getHeadRect().intersectsRect(food->areaRectangular))
     {
         addFood();
         snake->growUp();
     }
 
-    if (robot->getHeadRect().intersectsRect(food->areaRect))
+    if (robot->getHeadRect().intersectsRect(food->areaRectangular))
     {
         addFood();
         robot->growUp();

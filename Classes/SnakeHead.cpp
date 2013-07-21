@@ -20,19 +20,19 @@ SnakeHead::SnakeHead(const char* imageFileName)
     // set the imageFileName
     setAvatar(imageFileName);
     //  add to node
-    this->addChild(getAvatar());
+    addChild(getAvatar());
 
     setDirection(RIGHT);
 
     //  set the ratioConstant
-    setSizeAdjustionRatioConstant(10);
+    setSizeAdjustionRatioConstant(40);
     adjustObjectSize(getAvatar(), windowHeight);
 
     // the size of one step
     setMoveUnitPerStep(getAvatar(), windowHeight);
 
     // make rectenguler
-    setObjectRectengular();
+    setObjectRectangular();
 }
 
 SnakeHead::~SnakeHead()
@@ -79,7 +79,7 @@ void SnakeHead::move()
     setObjectAdjustedPosition(getNewPosition());
 
     //  update rectenguler
-    setObjectRectengular();
+    setObjectRectangular();
 
 }
 

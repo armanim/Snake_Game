@@ -7,7 +7,7 @@ Player::Player(Snake* snake)
     this->headPosition = snake->getHeadPosition();
 }
 
-int Player::searchDirection(CCPoint destination)
+int Player::searchDirection(cocos2d::CCPoint destination)
 {
     this->headPosition = mySnake->getHeadPosition();
     //  get snake head position
@@ -45,51 +45,51 @@ int Player::searchDirection(CCPoint destination)
     }
 }
 
-bool Player::checkUp(CCRect areaRect)
+bool Player::checkUp(cocos2d::CCRect areaRectangular)
 {
     float unit = mySnake->moveUnit / 2;
-    upRect = CCRectMake(headPosition.x, headPosition.y + unit + unit / 2, unit, unit);
+    upRect = cocos2d::CCRectMake(headPosition.x, headPosition.y + unit + unit / 2, unit, unit);
 
     //  if is avalible return true
-    if (upRect.intersectsRect(areaRect))
+    if (upRect.intersectsRect(areaRectangular))
         return false;
     return true;
 }
 
-bool Player::checkDown(CCRect areaRect)
+bool Player::checkDown(cocos2d::CCRect areaRectangular)
 {
     float unit = mySnake->moveUnit / 2;
-    downRect = CCRectMake(headPosition.x, headPosition.y - unit - unit / 2, unit, unit);
+    downRect = cocos2d::CCRectMake(headPosition.x, headPosition.y - unit - unit / 2, unit, unit);
 
     //  if is avalible return true
-    if (downRect.intersectsRect(areaRect))
+    if (downRect.intersectsRect(areaRectangular))
         return false;
     return true;
 }
 
-bool Player::checkRight(CCRect areaRect)
+bool Player::checkRight(cocos2d::CCRect areaRectangular)
 {
     float unit = mySnake->moveUnit / 2;
-    rightRect = CCRectMake(headPosition.x  + unit + unit / 2, headPosition.y, unit, unit);
+    rightRect = cocos2d::CCRectMake(headPosition.x  + unit + unit / 2, headPosition.y, unit, unit);
 
     //  if is avalible return true
-    if (rightRect.intersectsRect(areaRect))
+    if (rightRect.intersectsRect(areaRectangular))
         return false;
     return true;
 }
 
-bool Player::checkLeft(CCRect areaRect)
+bool Player::checkLeft(cocos2d::CCRect areaRectangular)
 {
     float unit = mySnake->moveUnit / 2;
-    leftRect = CCRectMake(headPosition.x - unit - unit / 2, headPosition.y, unit, unit);
+    leftRect = cocos2d::CCRectMake(headPosition.x - unit - unit / 2, headPosition.y, unit, unit);
 
     //  if is avalible return true
-    if (leftRect.intersectsRect(areaRect))
+    if (leftRect.intersectsRect(areaRectangular))
         return false;
     return true;
 }
 
-void Player::play(CCPoint destination)
+void Player::play(cocos2d::CCPoint destination)
 {
     int currentDirection = searchDirection(destination);
     setDirection(currentDirection);
