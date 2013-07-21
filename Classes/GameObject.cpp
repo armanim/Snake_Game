@@ -125,14 +125,14 @@ cocos2d::CCPoint GameObject::adjustObjectPosition(cocos2d::CCPoint newPosition)
 
 void GameObject::setObjectRectangular()
 {
-    float objectWidth = getAdjustedAvatarContentSize().width;
-    float objectHeight = getAdjustedAvatarContentSize().height;
+    float halfObjectWidth = getAdjustedAvatarContentSize().width / 2;
+    float halfobjectHeight = getAdjustedAvatarContentSize().height / 2;
 
     // make rectenguler
     areaRectangular = cocos2d::CCRectMake(
-                      cocos2d::CCNode::getPosition().x - objectWidth / 2,
-                      cocos2d::CCNode::getPosition().y - objectHeight / 2,
-                      objectWidth, objectHeight);
+                      cocos2d::CCNode::getPosition().x - halfObjectWidth / 2,
+                      cocos2d::CCNode::getPosition().y - halfobjectHeight / 2,
+                      halfObjectWidth, halfobjectHeight);
 }
 
 cocos2d::CCSize GameObject::getAdjustedAvatarContentSize()
