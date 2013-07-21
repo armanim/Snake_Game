@@ -7,13 +7,13 @@ Snake::Snake()
 {
     float windowHeight = CCDirector::sharedDirector()->getWinSize().height;
     //  set snake
-    direction = RIGHT;//rand() % 4;
+    currentDirection = RIGHT;//rand() % 4;
 
     //this->layer = layer;
 
     // setup the head
     head = new SnakeHead("head.png");
-    head->setDirection(direction);
+    head->setDirection(currentDirection);
     head->setPosition(CCPoint(600, 200));
     this->addChild(head);
 
@@ -30,7 +30,7 @@ Snake::Snake()
 
     //  get position for tail
     CCPoint point = head->getPosition();
-    point = getNextBackPosition(point, direction);
+    point = getNextBackPosition(point, currentDirection);
     moveUnit = head->getMoveUnitPerStep();
     length = 0;
 
@@ -105,33 +105,33 @@ void Snake::growUp()
 
 int Snake::getDirection()
 {
-    return direction;
+    return currentDirection;
 }
 
 void Snake::setDirection(int value)
 {
-    direction = value;
+    currentDirection = value;
 }
 
 void Snake::move()
 {
-        head->setDirection(direction);
+        head->setDirection(currentDirection);
         update();
 }
 
-CCPoint Snake::getNextBackPosition(CCPoint position, int direction)
+CCPoint Snake::getNextBackPosition(CCPoint position, int currentDirection)
 {
     float unit = head->getMoveUnitPerStep();
     //  get the next item position
-    if (direction == UP)
+    if (currentDirection == UP)
     {
         position.y -= unit;
     }
-    else if (direction == DOWN)
+    else if (currentDirection == DOWN)
     {
         position.y += unit;
     }
-    else if (direction == RIGHT)
+    else if (currentDirection == RIGHT)
     {
         position.x -= unit;
     }

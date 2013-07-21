@@ -56,3 +56,76 @@ cocos2d::CCSprite* GameObject::getAvatar()
 {
     return avatar;
 }
+
+void GameObject::setAvatarRotation(int currentDirection)
+{
+    switch(currentDirection)
+    {
+        case UP:
+            avatar->setRotation(0);
+            break;
+        case DOWN:
+            avatar->setRotation(180);
+            break;
+        case RIGHT:
+            avatar->setRotation(90);
+            break;
+        case LEFT:
+            avatar->setRotation(270);
+        default:
+            break;
+    }
+}
+
+void GameObject::setObjectAdjustedPosition(cocos2d::CCPoint newPosition)
+{
+    cocos2d::CCPoint adjustedPosition = adjustObjectPosition(newPosition);
+    cocos2d::CCNode::setPosition(adjustedPosition);
+}
+
+cocos2d::CCPoint GameObject::adjustObjectPosition(cocos2d::CCPoint newPosition)
+{
+    float moveUnit = getMoveUnitPerStep();
+
+    float halfObjectWidth = moveUnit / 2;
+    float halfObjectHeight = moveUnit / 2;
+
+    // adjust newPosition to legal
+    cocos2d::CCSize winSize = cocos2d::CCDirector::sharedDirector()->getWinSize();
+    float top = winSize.height - halfObjectHeight;
+    float floor = 0 + halfObjectHeight;
+    float right = winSize.width - halfObjectWidth;
+    float left = 0  + halfObjectWidth;
+
+    //  check newPosition and give new value
+    if (newPosition.y > top + halfObjectHeight)
+        newPosition.setPoint(newPosition.x, floor);
+    else if (newPosition.y < floor - halfObjectHeight)
+        newPosition.setPoint(newPosition.x, top);
+    else if (newPosition.x > right + halfObjectWidth)
+        newPosition.setPoint(left, newPosition.y);
+    else if (newPosition.x < left - halfObjectWidth)
+        newPosition.setPoint(right, newPosition.y);
+    else
+    {
+        newPosition.x = newPosition.x / (int)moveUnit;
+        newPosition.y = newPosition.y / (int)moveUnit;
+
+        newPosition.x = ((int)newPosition.x) * moveUnit + halfObjectWidth;
+        newPosition.y = ((int)newPosition.y) * moveUnit + halfObjectHeight;
+    }
+
+    return newPosition;
+}
+
+void GameObject::setObjectRectengular()
+{
+    float halfObjectWidth = moveUnitPerStep / 2;
+    float halfObjectHeight = moveUnitPerStep / 2;
+
+    // make rectenguler
+    areaRect = cocos2d::CCRectMake(
+                      getPosition().x - halfObjectWidth,
+                      getPosition().y - halfObjectHeight,
+                      moveUnitPerStep, moveUnitPerStep);
+}

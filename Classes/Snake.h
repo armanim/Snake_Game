@@ -29,7 +29,7 @@ public:
 
 private:
     int length;
-    int direction;  //  the snake moving direction
+    int currentDirection;  //  the snake moving direction
     bool isRunning;
     SnakeHead *head;   //  the handle(head) of snake
     CCSprite* bodyArr[100];

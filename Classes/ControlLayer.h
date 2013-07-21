@@ -3,14 +3,11 @@
 
 #include "cocos2d.h"
 
-#ifndef UP DOWN RIGHT LEFT
+//#define UP 0
+//#define DOWN 2
+//#define RIGHT 1
+//#define LEFT 3
 
-#define UP 0
-#define DOWN 2
-#define RIGHT 1
-#define LEFT 3
-
-#endif
 
 class ControlLayer : public cocos2d::CCLayer
 {

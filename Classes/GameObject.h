@@ -8,9 +8,14 @@
 #ifndef GAMEOBJECT_H_INCLUDED
 #define GAMEOBJECT_H_INCLUDED
 
+#define UP 0
+#define DOWN 2
+#define RIGHT 1
+#define LEFT 3
+
 #include "cocos2d.h"
 
-class GameObject
+class GameObject : public cocos2d::CCNode
 {
 public:
     GameObject();
@@ -18,13 +23,26 @@ public:
     // adjust the object size fit to screen size need the window hight (int)
     void adjustObjectSize(cocos2d::CCSprite*, const int);
 
+    // make position to a legal positon
+    cocos2d::CCPoint adjustObjectPosition(cocos2d::CCPoint);
+
     // set the size adjustion ratio constant
     void setSizeAdjustionRatioConstant(int);
 
+    // set image for the object face
     void setAvatar(const char*);
+
+    // set avatar rotation
+    void setAvatarRotation(int);
+
+    // set adjustted position
+    void setObjectAdjustedPosition(cocos2d::CCPoint);
 
     // set the move distance for a step
     void setMoveUnitPerStep(cocos2d::CCSprite*, const int);
+
+    // set the object rectengular
+    void setObjectRectengular();
 
     // calculate the image scale
     float getImageScale(cocos2d::CCSprite*, const int);

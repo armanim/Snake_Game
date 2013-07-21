@@ -1,14 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="README.md" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Classes/Food.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="280" topLine="0" />
+			<Cursor1 position="0" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Classes/SnakeHead.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Classes/Food.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="715" topLine="190" />
+			<Cursor1 position="741" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Classes/GameObject.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2701" topLine="107" />
+		</Cursor>
+	</File>
+	<File name="Classes/AppDelegate.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="51" topLine="5" />
+		</Cursor>
+	</File>
+	<File name="Classes/Snake.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1031" topLine="3" />
+		</Cursor>
+	</File>
+	<File name="Classes/SnakeHead.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1686" topLine="102" />
 		</Cursor>
 	</File>
 	<File name="Classes/ControlLayer.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -21,39 +41,19 @@
 			<Cursor1 position="90" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Classes/AppDelegate.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Classes/Snake.cpp" open="1" top="1" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="51" topLine="5" />
+			<Cursor1 position="3456" topLine="136" />
 		</Cursor>
 	</File>
-	<File name="Classes/Food.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="README.md" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="0" />
+			<Cursor1 position="280" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Classes/Snake.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Classes/GameObject.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="688" topLine="3" />
-		</Cursor>
-	</File>
-	<File name="Classes/Snake.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="837" topLine="6" />
-		</Cursor>
-	</File>
-	<File name="Classes/Food.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="741" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="Classes/GameObject.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1140" topLine="7" />
-		</Cursor>
-	</File>
-	<File name="Classes/SnakeHead.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="443" topLine="13" />
+			<Cursor1 position="1338" topLine="21" />
 		</Cursor>
 	</File>
 	<File name="Classes/ObjectLayer.cpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -61,9 +61,9 @@
 			<Cursor1 position="681" topLine="20" />
 		</Cursor>
 	</File>
-	<File name="Classes/GameObject.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Classes/SnakeHead.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="722" topLine="2" />
+			<Cursor1 position="776" topLine="7" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

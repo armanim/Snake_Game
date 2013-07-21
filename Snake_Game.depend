@@ -14,7 +14,7 @@
 	"BackgroundLayer.h"
 	"GlobalVariables.h"
 
-1365861544 /home/abdutahir/Workspace/cocos2dx/Snake_Game/Classes/ControlLayer.h
+1374382585 /home/abdutahir/Workspace/cocos2dx/Snake_Game/Classes/ControlLayer.h
 	"cocos2d.h"
 
 1366556832 /home/abdutahir/Workspace/cocos2dx/Snake_Game/Classes/ObjectLayer.h
@@ -23,13 +23,12 @@
 	"Food.h"
 	"Player.h"
 
-1374148313 /home/abdutahir/Workspace/cocos2dx/Snake_Game/Classes/Snake.h
+1374381004 /home/abdutahir/Workspace/cocos2dx/Snake_Game/Classes/Snake.h
 	"cocos2d.h"
 	"SnakeHead.h"
 	"Food.h"
 
-1374255710 /home/abdutahir/Workspace/cocos2dx/Snake_Game/Classes/SnakeHead.h
-	"cocos2d.h"
+1374388089 /home/abdutahir/Workspace/cocos2dx/Snake_Game/Classes/SnakeHead.h
 	"GameObject.h"
 
 1374148241 /home/abdutahir/Workspace/cocos2dx/Snake_Game/Classes/Food.h
@@ -42,7 +41,7 @@
 1365823462 /home/abdutahir/Workspace/cocos2dx/Snake_Game/Classes/BackgroundLayer.h
 	"cocos2d.h"
 
-1366128524 /home/abdutahir/Workspace/cocos2dx/Snake_Game/Classes/GlobalVariables.h
+1374381027 /home/abdutahir/Workspace/cocos2dx/Snake_Game/Classes/GlobalVariables.h
 
 1373902522 source:/home/abdutahir/Workspace/cocos2dx/Snake_Game/Classes/BackgroundLayer.cpp
 	"BackgroundLayer.h"
@@ -65,14 +64,14 @@
 	"ObjectLayer.h"
 	"GlobalVariables.h"
 
-1374148241 source:/home/abdutahir/Workspace/cocos2dx/Snake_Game/Classes/Player.cpp
+1374382117 source:/home/abdutahir/Workspace/cocos2dx/Snake_Game/Classes/Player.cpp
 	"Player.h"
 
-1374256541 source:/home/abdutahir/Workspace/cocos2dx/Snake_Game/Classes/Snake.cpp
+1374381004 source:/home/abdutahir/Workspace/cocos2dx/Snake_Game/Classes/Snake.cpp
 	"Snake.h"
 	"SnakeHead.h"
 
-1374256663 source:/home/abdutahir/Workspace/cocos2dx/Snake_Game/Classes/SnakeHead.cpp
+1374388597 source:/home/abdutahir/Workspace/cocos2dx/Snake_Game/Classes/SnakeHead.cpp
 	"SnakeHead.h"
 	"GlobalVariables.h"
 
@@ -84,9 +83,9 @@
 	<unistd.h>
 	<string>
 
-1374256472 source:/home/abdutahir/Workspace/cocos2dx/Snake_Game/Classes/GameObject.cpp
+1374388229 source:/home/abdutahir/Workspace/cocos2dx/Snake_Game/Classes/GameObject.cpp
 	"GameObject.h"
 
-1374256442 /home/abdutahir/Workspace/cocos2dx/Snake_Game/Classes/GameObject.h
+1374388233 /home/abdutahir/Workspace/cocos2dx/Snake_Game/Classes/GameObject.h
 	"cocos2d.h"
 

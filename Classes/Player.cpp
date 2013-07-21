@@ -1,14 +1,5 @@
 #include "Player.h"
 
-#ifndef UP DOWN RIGHT LEFT
-
-#define UP 0
-#define DOWN 2
-#define RIGHT 1
-#define LEFT 3
-
-#endif
-
 
 Player::Player(Snake* snake)
 {
@@ -20,7 +11,7 @@ int Player::searchDirection(CCPoint destination)
 {
     this->headPosition = mySnake->getHeadPosition();
     //  get snake head position
-    int direction = mySnake->getDirection();
+    int currentDirection = mySnake->getDirection();
 
     //  if the distance is less than unit it is ok
     float unit = mySnake->moveUnit / 2;
@@ -32,7 +23,7 @@ int Player::searchDirection(CCPoint destination)
     float X = abs(x);
     float Y = abs(y);
 
-    if ((direction == UP || direction == DOWN) && X > unit)
+    if ((currentDirection == UP || currentDirection == DOWN) && X > unit)
     {
         if (x > 0)
             return RIGHT;
@@ -40,7 +31,7 @@ int Player::searchDirection(CCPoint destination)
             return LEFT;
         else {}
     }
-    else if ((direction == RIGHT || direction == LEFT) && Y > unit)
+    else if ((currentDirection == RIGHT || currentDirection == LEFT) && Y > unit)
     {
         if (y > 0)
             return UP;
@@ -50,7 +41,7 @@ int Player::searchDirection(CCPoint destination)
     }
     else
     {
-        return direction;
+        return currentDirection;
     }
 }
 
@@ -100,16 +91,16 @@ bool Player::checkLeft(CCRect areaRect)
 
 void Player::play(CCPoint destination)
 {
-    int direction = searchDirection(destination);
-    setDirection(direction);
+    int currentDirection = searchDirection(destination);
+    setDirection(currentDirection);
 }
 
-void Player::setDirection(int direction)
+void Player::setDirection(int currentDirection)
 {
-    mySnake->setDirection(direction);
+    mySnake->setDirection(currentDirection);
 }
 
-void Player::adjustDirection(int direction)
+void Player::adjustDirection(int currentDirection)
 {
     //if (direction == UP)
 }

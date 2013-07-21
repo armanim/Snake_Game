@@ -13,8 +13,6 @@ using namespace cocos2d;
 
 SnakeHead::SnakeHead(const char* imageFileName)
 {
-    // is not moving
-    isMoving = false;
 
     // get the window height
     int windowHeight = getWindowHight();
@@ -32,13 +30,9 @@ SnakeHead::SnakeHead(const char* imageFileName)
 
     // the size of one step
     setMoveUnitPerStep(getAvatar(), windowHeight);
-    float moveUnit = getMoveUnitPerStep();
 
-    //  make rectenguler
-    areaRect = CCRectMake(
-                      getPosition().x - moveUnit/2,
-                      getPosition().y - moveUnit/2,
-                      moveUnit, moveUnit);
+    // make rectenguler
+    setObjectRectengular();
 }
 
 SnakeHead::~SnakeHead()
@@ -53,146 +47,42 @@ int SnakeHead::getWindowHight()
     return CCDirector::sharedDirector()->getWinSize().height;
 }
 
-bool SnakeHead::isLegalDirection(int value)
+bool SnakeHead::isLegalDirection(int directionValue)
 {
-    if (value >= 0 && value <= 3 && (direction - value != 0))
+    // the last one is validate that the next dierction can not be same as currnent direction
+    if (directionValue >= 0 && directionValue <= 3 && (currentDirection - directionValue != 0))
         return true;
     return false;
 }
 
-void SnakeHead::setDirection(int value)
+void SnakeHead::setDirection(int newDirection)
 {
     //  check the value
-    if (isLegalDirection(value))
-        if ((value - direction != 2) && (direction - value != 2))
+    if (isLegalDirection(newDirection))
+        if ((newDirection - currentDirection != 2) && (currentDirection - newDirection != 2))
         {
-            direction = value;
-            switch(direction)
-            {
-                case UP:
-                    getAvatar()->setRotation(0);
-                    break;
-                case DOWN:
-                    getAvatar()->setRotation(180);
-                    break;
-                case RIGHT:
-                    getAvatar()->setRotation(90);
-                    break;
-                case LEFT:
-                    getAvatar()->setRotation(270);
-                default:
-                    break;
-            }
+            currentDirection = newDirection;
+            // change the avatar face to the corresponding rotation
+            setAvatarRotation(currentDirection);
         }
 
 }
 
 int SnakeHead::getDirection()
 {
-    return direction;
+    return currentDirection;
 }
 
 void SnakeHead::move()
 {
-    isMoving = true;
-    float moveUnit = getMoveUnitPerStep();
-
-    float x = this->getPosition().x;
-    float y = this->getPosition().y;
-    //  change position
-    switch(direction)
-    {
-        case UP:
-            y += moveUnit;
-            break;
-        case DOWN:
-            y -= moveUnit;
-            break;
-        case RIGHT:
-            x += moveUnit;
-            break;
-        case LEFT:
-            x -= moveUnit;
-        default:
-            break;
-    }
-
-
-    setPosition(ccp(x, y));
-    CCPoint point = getPosition();
+    // set new pozition
+    setObjectAdjustedPosition(getNewPosition());
 
     //  update rectenguler
-    areaRect = CCRectMake(
-                      point.x - moveUnit/2,
-                      point.y - moveUnit/2,
-                      moveUnit/2, moveUnit/2);
-    isMoving = false;
+    setObjectRectengular();
 
 }
 
-bool SnakeHead::isLegalPosition()
-{
-    //  get self position
-    CCPoint position = getPosition();
-    float x = position.x;
-    float y = position.y;
-
-    //  get window size and self size
-    CCSize winSize = CCDirector::sharedDirector()->getWinSize();
-
-    float width = getAvatar()->getContentSize().width / 2;
-    float height = getAvatar()->getContentSize().height / 2;
-
-    if (x >= winSize.width  - width)
-        return false;
-    if (x < 0  + width)
-        return false;
-    if (y >= winSize.height - height)
-        return false;;
-    if (y < 0 + height)
-        return false;
-    return true;
-}
-
-CCPoint SnakeHead::adjustPosition()
-{
-    float moveUnit = getMoveUnitPerStep();
-    //  get self position
-    CCPoint position = getPosition();
-    float x = position.x;
-    float y = position.y;
-    float width = moveUnit / 2;
-    float height = moveUnit / 2;
-
-    // adjust position to legal
-    CCSize winSize = CCDirector::sharedDirector()->getWinSize();
-    float top = winSize.height - width;
-    float floor = 0 + height;
-    float right = winSize.width - width;
-    float left = 0  + width;
-
-    //  check position and give new value
-    if (y > top + height)
-        position.setPoint(x, floor);
-    else if (y < floor - height)
-        position.setPoint(x, top);
-    else if (x > right + width)
-        position.setPoint(left, y);
-    else if (x < left - width)
-        position.setPoint(right, y);
-    else
-    {
-        x = x / (int)moveUnit;
-        y = y / (int)moveUnit;
-
-        x = ((int)x) * moveUnit + moveUnit / 2;
-        y = ((int)y) * moveUnit + moveUnit / 2;
-
-        position.setPoint(x, y);
-    }
-
-    CCNode::setPosition(position);
-}
 
 int SnakeHead::getBackDirection()
 {
@@ -209,10 +99,31 @@ int SnakeHead::getBackDirection()
     }
 }
 
-void SnakeHead::setPosition(CCPoint point)
+cocos2d::CCPoint SnakeHead::getNewPosition()
 {
-    CCNode::setPosition(point);
-    //if (!isLegalPosition())
-    adjustPosition();
+    float moveUnit = getMoveUnitPerStep();
+
+    // get the snake head current position
+    cocos2d::CCPoint currentPosition = getPosition();
+
+    //  change position
+    switch(currentDirection)
+    {
+        case UP:
+            currentPosition.y += moveUnit;
+            break;
+        case DOWN:
+            currentPosition.y -= moveUnit;
+            break;
+        case RIGHT:
+            currentPosition.x += moveUnit;
+            break;
+        case LEFT:
+            currentPosition.x -= moveUnit;
+        default:
+            break;
+    }
+
+    return currentPosition;
 }
 
