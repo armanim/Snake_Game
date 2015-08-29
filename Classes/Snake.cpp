@@ -67,39 +67,39 @@ void Snake::update()
 
 void Snake::growUp()
 {
-//    if (length < 99 ) {
-//        //  get snake head position and direction
-//        CCPoint point = head->getPosition();
-//
-//        //  create a snake body
-//        CCSprite* bodyItem = CCSprite::create("body.png", CCRectMake(0, 0, 100, 100));
-//        this->addChild(bodyItem);
-//        bodyItem->setScale(imageScale);
-//
-//        if (length != 0)
-//        {
-//            for (int i = length; i > 0; i--)
-//            {
-//                bodyArr[i] = bodyArr[i - 1];
-//            }
-//        }
-//
-//        //  set body item to head position
-//        bodyItem->setPosition(point);
-//
-//        //  let head make a move
-//        point = head->getPosition();
-//        point = bodyItem->getPosition();
-//
-//        //move head
-//        head->move();
-//
-//
-//        bodyArr[0] = bodyItem;
-//
-//        length++;
-//
-//    }
+    if (length < 99 ) {
+        //  get snake head position and direction
+        CCPoint point = head->getPosition();
+
+        //  create a snake body
+        CCSprite* bodyItem = CCSprite::create("body.png", CCRectMake(0, 0, 100, 100));
+        this->addChild(bodyItem);
+        bodyItem->setScale(imageScale);
+
+        if (length != 0)
+        {
+            for (int i = length; i > 0; i--)
+            {
+                bodyArr[i] = bodyArr[i - 1];
+            }
+        }
+
+        //  set body item to head position
+        bodyItem->setPosition(point);
+
+        //  let head make a move
+        point = head->getPosition();
+        point = bodyItem->getPosition();
+
+        //move head
+        head->move();
+
+
+        bodyArr[0] = bodyItem;
+
+        length++;
+
+    }
 
 }
 
